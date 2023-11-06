@@ -205,13 +205,12 @@ def process_pose(current_frame, pose, lhandpose, rhandpose, trans, pelvis_positi
 
         # bone_rotation = Matrix(mat_rot).to_quaternion()
         bone_rotation = Quaternion(mat_rot)
-        quat_x_90_cw = Quaternion((1.0, 0.0, 0.0), radians(-90))
-        quat_z_90_cw = Quaternion((0.0, 0.0, 1.0), radians(-90))
+        quat_x_180_cw = Quaternion((1.0, 0.0, 0.0), radians(-180))
 
         if index == 0:
             # Rotate pelvis so that avatar stands upright and looks along negative Y avis
+            bone.rotation_quaternion = quat_x_180_cw @ bone_rotation
             # bone.rotation_quaternion = (quat_x_90_cw @ quat_z_90_cw) @ bone_rotation
-            pass
         else:
             bone.rotation_quaternion = bone_rotation
 
